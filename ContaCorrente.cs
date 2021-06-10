@@ -13,7 +13,7 @@ namespace Exercicio_BancoVirtualGetSet
         public int NumConta { get; set; }
 
         //Valor padrão do saldo inicial da conta é de 100 e não 0
-        private double saldoPrivado = 100;
+        private double _saldo = 100;
 
 
         // Propriedade Saldo
@@ -22,7 +22,7 @@ namespace Exercicio_BancoVirtualGetSet
             get
             {
                 // O [saldo] é um campo privado que pode ser usado em uma propriedade.
-                return saldoPrivado;
+                return _saldo;
             }
             set
             {
@@ -30,17 +30,17 @@ namespace Exercicio_BancoVirtualGetSet
                 {
                     return;
                 }
-                saldoPrivado = value;
+                _saldo = value;
             }
         }
 
         public bool Sacar(double valor)
         {
-            if (saldoPrivado < valor)
+            if (_saldo < valor)
             {
                 return false;
             }
-            saldoPrivado -= valor;
+            _saldo -= valor;
             return true;
         }
 
@@ -48,16 +48,16 @@ namespace Exercicio_BancoVirtualGetSet
         //Void, pois a função não tem retorno
         public void Depositar(double valor)
         {
-            saldoPrivado += valor;
+            _saldo += valor;
         }
 
         public bool Transferir(double valor, ContaCorrente contaDestino)
         {
-            if (saldoPrivado < valor)
+            if (_saldo < valor)
             {
                 return false;
             }
-            saldoPrivado -= valor;
+            _saldo -= valor;
             contaDestino.Depositar(valor);
             return true;
         }
